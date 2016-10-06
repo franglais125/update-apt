@@ -42,27 +42,25 @@ elif [ "$1" = "help" ]
 then
   ${path}/help.sh
   exit 0
+elif [ $# -eq 0 ]
+then
+  # If no option is passed, execute the whole update sequence
+  #   Update the repo information      #
+  sudo apt update
+  #   Check for residual config files  #
+  ${path}/residual.sh ${path}/tmp/
+  #   Check for obsolete packages      #
+  ${path}/obsolete.sh ${path}/tmp/
+  #   Check for local packages         #
+  ${path}/local.sh ${path}/tmp/
+  #   Check for new packages           #
+  ${path}/new.sh ${path}/tmp/
+  #   Check for upgradable pacakges    #
+  ${path}/upgradable.sh ${path}/tmp/
+  exit 0
+else
+  echo "Error: \"$1\" is not a valid command"
+  exit 1
 fi
 
 
-# If no option is passed, execute the whole update sequence
-
-#   Update the repo information      #
-sudo apt update
-
-#   Check for residual config files  #
-${path}/residual.sh ${path}/tmp/
-
-#   Check for obsolete packages      #
-${path}/obsolete.sh ${path}/tmp/
-
-#   Check for local packages         #
-${path}/local.sh ${path}/tmp/
-
-#   Check for new packages           #
-${path}/new.sh ${path}/tmp/
-
-#   Check for upgradable pacakges    #
-${path}/upgradable.sh ${path}/tmp/
-
-exit 0

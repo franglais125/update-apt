@@ -12,10 +12,19 @@ file_all=${path}all-packages.list
 file=${path}new-packages.list
 temporary=${path}temporary.list
 
+first_run=false
+
 #Prepare
-mv ${file_all} ${file_all}.old
+if [ -f ${file_all} ]; then
+  mv ${file_all} ${file_all}.old
+else
+  first_run=true
+fi
 
 apt-cache search . | awk '{print $1}' | sort > ${file_all}
+if [ "$first_run" = true ]; then
+  exit 0
+fi
 diff ${file_all} ${file_all}.old | awk '{print $2}' | grep -v -e '^$' > ${temporary}
 
 # Check that the difference doesn't come from the `.old` file
@@ -36,6 +45,10 @@ num=`cat ${file}.test | wc -l`
 if [ "$num" -gt 0 ]
 then
   mv ${file}.test ${file}
+fi
+
+if [ ! -f ${file} ]; then
+  touch ${file}
 fi
 
 #Print!
