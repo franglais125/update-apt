@@ -1,5 +1,5 @@
 #!/bin/bash
-more << EOF
+less << EOF
 This small collection of scripts simply tries to emulate some features from
 Synaptic in the terminal.
 It uses the usual available dpkg and apt commands to achieve this.

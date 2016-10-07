@@ -2,13 +2,15 @@
 path=___BASEDIR___
 
 case "$1" in
+  "shortlist")
+    echo update upgrade fupgrade list-upgrades residual obsolete local new clean help ;;
   "update")
     sudo apt update ;;
   "upgrade")
     sudo apt upgrade ;;
   "fupgrade")
     sudo apt full-upgrade ;;
-  "upgradable")
+  "list-upgrades")
     ${path}/upgradable.sh ${path}/tmp/ ;;
   "residual")
     ${path}/residual.sh ${path}/tmp/ ;;
