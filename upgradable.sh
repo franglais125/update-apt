@@ -6,15 +6,18 @@
 #                                    #
 ######################################
 
-path=$1
+JUST_SHOW=$1
+path=$2
 
 file=${path}upgradable.list
-apt list --upgradable &> ${file}.tmp
+if [ "$JUST_SHOW" -lt 1 ]
+then
+  apt list --upgradable &> ${file}.tmp
+  sed -i ':a;N;$!ba;s/\n/\\\\e[0;32m\n/g' ${file}.tmp
+  sed -i 's/\//\\\\e[0m\//g' ${file}.tmp
+  tail -n+5 ${file}.tmp > ${file}
+fi
 
-sed -i ':a;N;$!ba;s/\n/\\\\e[0;32m\n/g' ${file}.tmp
-sed -i 's/\//\\\\e[0m\//g' ${file}.tmp
-
-tail -n+5 ${file}.tmp > ${file}
 num=`cat ${file} | wc -l`
 if [ "$num" -gt 0 ]
 then

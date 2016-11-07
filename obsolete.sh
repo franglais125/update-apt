@@ -6,10 +6,15 @@
 #                                    #
 ######################################
 
-path=$1
+JUST_SHOW=$1
+path=$2
 
 file=${path}obsolete.list
-apt-show-versions | grep 'No available version' | awk '{print $1}' > ${file}
+if [ "$JUST_SHOW" -lt 1 ]
+then
+  apt-show-versions | grep 'No available version' | awk '{print $1}' > ${file}
+fi
+
 num=`cat ${file} | wc -l`
 if [ "$num" -gt 0 ]
 then

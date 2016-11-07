@@ -6,11 +6,22 @@
 #                                    #
 ######################################
 
-path=$1
+JUST_SHOW=$1
+path=$2
 
 file_all=${path}all-packages.list
 file=${path}new-packages.list
 temporary=${path}temporary.list
+
+if [ "$JUST_SHOW" -gt 0 ]
+then
+  num=`cat ${file} | wc -l`
+  if [ "$num" -gt 0 ]
+  then
+    less $file
+  fi
+  exit
+fi
 
 first_run=false
 

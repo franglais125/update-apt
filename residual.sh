@@ -6,10 +6,15 @@
 #                                    #
 ######################################
 
-path=$1
+JUST_SHOW=$1
+path=$2
 
 file=${path}residual-config.list
-dpkg -l | grep '^rc'| awk '{print $2}' > ${file}
+if [ "$JUST_SHOW" -lt 1 ]
+then
+  dpkg -l | grep '^rc'| awk '{print $2}' > ${file}
+fi
+
 num=`cat ${file} | wc -l`
 if [ "$num" -gt 0 ]
 then
