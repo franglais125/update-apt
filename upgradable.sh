@@ -28,4 +28,5 @@ then
   do
     echo -e $line
   done
+  notify-send -i system-software-update "upd: Updates available"
 fi
