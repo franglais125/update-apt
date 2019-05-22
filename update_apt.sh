@@ -32,14 +32,14 @@ case "$1" in
     JUST_SHOW=0
     #   Update the repo information      #
     sudo apt update
+    #   Check for new packages           #
+    ${path}/new.sh        ${JUST_SHOW} ${path}/tmp/
     #   Check for residual config files  #
     ${path}/residual.sh   ${JUST_SHOW} ${path}/tmp/
     #   Check for obsolete packages      #
     ${path}/obsolete.sh   ${JUST_SHOW} ${path}/tmp/
     #   Check for local packages         #
     ${path}/local.sh      ${JUST_SHOW} ${path}/tmp/
-    #   Check for new packages           #
-    ${path}/new.sh        ${JUST_SHOW} ${path}/tmp/
     #   Check for upgradable pacakges    #
     ${path}/upgradable.sh ${JUST_SHOW} ${path}/tmp/ ;;
   *)
