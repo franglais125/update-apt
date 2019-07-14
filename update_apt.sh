@@ -4,6 +4,8 @@ path=___BASEDIR___
 # Simply show the file
 JUST_SHOW=1
 
+date
+
 case "$1" in
   "shortlist")
     echo update upgrade fupgrade list-upgrades residual obsolete local new clean help ;;
