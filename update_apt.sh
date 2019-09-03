@@ -33,6 +33,7 @@ case "$1" in
     # If no option is passed, execute the whole update sequence
     JUST_SHOW=0
     #   Update the repo information      #
+    echo "sudo apt update"
     sudo apt update
     #   Check for new packages           #
     ${path}/new.sh        ${JUST_SHOW} ${path}/tmp/

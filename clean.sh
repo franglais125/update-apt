@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "Cleaning"
+echo "Cleaning: sudo apt clean"
 sudo apt clean
-echo -e "\nAutoremoving"
+echo -e "\nAutoremoving: sudo apt autoremove --purge"
 sudo apt autoremove --purge
